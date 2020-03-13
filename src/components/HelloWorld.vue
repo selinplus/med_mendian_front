@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-button type="primary" shape="circle" icon="user" style="border:0px; background: cornflowerblue" @click="showModal"></a-button>
+    <a-button type="primary" shape="circle" icon="user" style="border:0px; background: #2196F3" @click="showModal"></a-button>
     <a-modal title="修改密码" v-model="visible" @ok="hideModal" okText="确认" cancelText="取消">
     <a-form :form="form" @submit="hideModal">
     <a-form-item  v-bind="formItemLayout" label="新密码">
@@ -107,7 +107,6 @@
           self.$axios
           .post("/api/v1/mendians/eidtpass", { id: self.id, password: values.confirm})
           .then(res => {
-            console.log(res)
             if (res.data.code == 200) {
 
             self.$message.success('密码修改成功！',5);
@@ -129,7 +128,7 @@
 <style >
 
 .ant-modal-header{
-  background-color:cornflowerblue !important
+  background-color:#2196F3 !important
 }
 
 </style>

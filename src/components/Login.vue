@@ -47,7 +47,7 @@
       display: flex;
       align-items: center;
       justify-content: center;">
-        <a-button type="primary" html-type="submit" style="width:100px;background-color:cornflowerblue;" class="login-form-button">
+        <a-button type="primary" html-type="submit" style="width:100px;background-color:#2196F3;" class="login-form-button">
         登录
       </a-button>
 </div>
@@ -74,7 +74,7 @@ import { mapMutations } from "vuex";
         xs:'',
       mc:'药店管理端',
     hs:{
-      "background-color":"cornflowerblue","width":"490px", "border-radius":"10px","color":"#ffffff",   "display": "flex",
+      "background-color":"#2196F3","width":"490px", "border-radius":"10px","color":"#ffffff",   "display": "flex",
       "align-items": "center",
       "justify-content": "center"
     },
@@ -90,9 +90,10 @@ import { mapMutations } from "vuex";
     this.form = this.$form.createForm(this, { name: 'normal_login' });
   },
  watch: {
-      xs(val) {
-        console.log(val)
-      },},
+      // xs(val) {
+      //   console.log(val)
+      // },
+ },
   mounted(){
   
   },
@@ -118,9 +119,7 @@ import { mapMutations } from "vuex";
               values.password
           )
           .then(res => {
-           console.log(res)
             if (res.data.code == 200) {
-            
               self.addToken(res.data.data.token);
               self.addUsername( values.userName);
               self.addMendianID(res.data.data.data.ID);

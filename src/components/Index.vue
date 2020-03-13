@@ -1,6 +1,6 @@
 <template>
   <a-layout id="components-layout-demo-custom-trigger">
-    <a-layout-sider collapsedWidth=0   width=240 :trigger="null" collapsible v-model="collapsed" breakpoint="lg" style="background-color:cornflowerblue;height:100vh;;box-shadow:2px 2px 5px 2px rgba(0,0,0,0.3);">
+    <a-layout-sider collapsedWidth=0   width=240 :trigger="null" collapsible v-model="collapsed" breakpoint="lg" style="background-color:#2196F3;height:100vh;;box-shadow:2px 2px 5px 2px rgba(0,0,0,0.3);">
     
       
       <div class="logo" >
@@ -17,7 +17,7 @@
        </div>
       </div>
           
-      <a-menu  :defaultOpenKeys="openKeys" mode="inline" style="background-color:cornflowerblue;width:100%;">
+      <a-menu  :defaultOpenKeys="openKeys" mode="inline" style="background-color:#2196F3;width:100%;">
  <a-sub-menu key="sub1" >
     <span slot="title"><span>管理功能</span></span>
         <a-menu-item @click="home" key="1"  >
@@ -40,7 +40,7 @@
       
     </a-layout-sider>
     <a-layout>
-      <a-layout-header style="display:flex;justify-content: space-between; background: cornflowerblue; padding: 0;box-shadow:2px 2px 10px 2px rgba(0,0,0,0.7);">
+      <a-layout-header style="display:flex;justify-content: space-between; background: #2196F3; padding: 0;box-shadow:2px 2px 10px 2px rgba(0,0,0,0.7);">
         <a-icon
           class="trigger"
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
@@ -51,7 +51,7 @@
                 <my-button ></my-button>
                 &nbsp;   &nbsp;
                 <div>
-                     <a-button type="primary" shape="circle" icon="poweroff" style="border:0; background: cornflowerblue" @click="tc"></a-button>
+                     <a-button type="primary" shape="circle" icon="poweroff" style="border:0; background: #2196F3" @click="tc"></a-button>
                 </div>
                
              </div>
@@ -137,7 +137,7 @@ import xg from './HelloWorld'
   }
 
 .ant-menu-submenu > .ant-menu{
- background-color: cornflowerblue !important
+ background-color: #2196F3 !important
 }
 .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected{
   background-color: skyblue !important;

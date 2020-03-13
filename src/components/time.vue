@@ -2,8 +2,8 @@
   <a-row  >
     <a-col :xs="24" :lg="22">
        <a-range-picker
+        :ranges="{ 当天: [moment(), moment()], '本月': [moment().startOf('month'), moment().endOf('month')] }"
       style="width:300px;margin-right:10px"
-      :showTime="{ format: 'HH:mm' }"
       format="YYYY-MM-DD"
       :placeholder="['开始时间', '结束时间']"
       :defaultValue="[moment(begtime, dateFormat),moment(endtime, dateFormat)]"
@@ -17,7 +17,7 @@
   
    
     <a-col :xs="22" :lg="1" >
-        <a-button type="primary" shape="circle" icon="download" style="border:0px; background: cornflowerblue" @click="downcf"></a-button>
+        <a-button type="primary" :disabled="disabled" shape="circle" icon="download" style="border:0px; background: #2196F3" @click="downcf"></a-button>
     </a-col>
     <a-col  :xs="2"  :lg="1">
       <a-popconfirm
@@ -28,7 +28,7 @@
     okText="确定"
     cancelText="取消"
   >
-    <a-button type="primary" shape="circle" icon="delete" style="border:0px; background: cornflowerblue"></a-button>
+    <a-button type="primary" shape="circle" icon="delete" style="border:0px; background: #2196F3"></a-button>
   </a-popconfirm>
       
     </a-col>
@@ -36,27 +36,28 @@
 </template>
 <script>
 import moment from 'moment';
+import 'moment/locale/zh-cn'; 
+moment.locale('zh-cn');
   export default {
     data(){
 return{
   begtime:'',
   endtime:'',
-  dateFormat: 'YYYY-MMDD',
+  dateFormat: 'YYYY-MM-DD',
   id:'',
-  mc:''
+  mc:'',
+  disabled:false
 
 }
     },
     methods: {
       moment,
-        confirm(e) {
+        confirm() {
            this.$axios.get("/api/v1/clearmdcf?id="+this.id).then(res=>{
              if(res.data.msg=="ok"){
           this.$message.success('删除成功')
              }
-             
         })
-       
       },
     
   downcf: function() {
@@ -76,29 +77,34 @@ return{
     },
       onChange(dates,dateString){
          this.begtime=dateString[0]
-         console.log( this.begtime)
          this.endtime=dateString[1]
-         console.log(this.endtime)
       },
 
       btn(){
       
          this.$axios.get("/api/v1/mgroup/presuri?mendianID="+this.id+"&begtime="+this.begtime+"&endtime="+this.endtime).then(res => {
-          if (res.data.data) {
+           if(res.data.data==null){
+               this.disabled=true
+           }else{
+          this.disabled=false
+           }
+        
              this.$emit('cvalue', res.data.data)
-          }
+         
         })
-      }
+      },
+
 
     },
     mounted(){
-      this.btn();
+        this.btn();
     },
     created(){
-      this.begtime= moment(new Date(), this.dateFormat)
-      this.endtime= moment(new Date(), this.dateFormat)
+      this.begtime=moment().format('YYYY-MM-DD')
+      this.endtime= moment().format('YYYY-MM-DD')
       this.id=this.$store.state.mendianID;
-      this.mc=this.$store.state.mc
+      this.mc=this.$store.state.mc;
+    
     },
   };
 </script>
